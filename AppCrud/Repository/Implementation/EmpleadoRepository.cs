@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 
 namespace AppCrud.Repository.Implementation;
 
-public class EmpleadoRepository: IGenericRepository<Empleado>
+public class EmpleadoRepository : IGenericRepository<Empleado>
 {
     private readonly string _cadenaSQL = "";
 
@@ -13,7 +13,7 @@ public class EmpleadoRepository: IGenericRepository<Empleado>
     {
         _cadenaSQL = configuration.GetConnectionString("cadenaSQL");
     }
-    
+
     public async Task<List<Empleado>> Lista()
     {
         List<Empleado> _lista = new List<Empleado>();
@@ -36,7 +36,7 @@ public class EmpleadoRepository: IGenericRepository<Empleado>
                             nombre = dr["nombre"].ToString()
                         },
                         sueldo = Convert.ToInt32(dr["sueldo"]),
-                        fechaContrato = dr["fechaContrato"].ToString() 
+                        fechaContrato = dr["fechaContrato"].ToString()
                     });
                 }
             }
@@ -52,21 +52,19 @@ public class EmpleadoRepository: IGenericRepository<Empleado>
             connection.Open();
             SqlCommand cmd = new SqlCommand("sp_GuardarEmpleado", connection);
             cmd.Parameters.AddWithValue("nombreCompleto", modelo.nombreCompleto);
-            cmd.Parameters.AddWithValue("idDepartamento", modelo.refDepartamento);
+            cmd.Parameters.AddWithValue("idDepartamento", modelo.refDepartamento.idDepartamento);
             cmd.Parameters.AddWithValue("sueldo", modelo.sueldo);
             cmd.Parameters.AddWithValue("fechaContrato", modelo.fechaContrato);
             cmd.CommandType = CommandType.StoredProcedure;
-
+    
             int affectedRows = await cmd.ExecuteNonQueryAsync();
-
-            if (affectedRows > 0)
-                return true;
-            else
-                return false;
+    
+            return affectedRows > 0;
             
-
+    
         }
     }
+
 
     public async Task<bool> Editar(Empleado modelo)
     {
@@ -83,12 +81,7 @@ public class EmpleadoRepository: IGenericRepository<Empleado>
 
             int affectedRows = await cmd.ExecuteNonQueryAsync();
 
-            if (affectedRows > 0)
-                return true;
-            else
-                return false;
-            
-
+            return affectedRows > 0;
         }
     }
 
@@ -103,12 +96,7 @@ public class EmpleadoRepository: IGenericRepository<Empleado>
 
             int affectedRows = await cmd.ExecuteNonQueryAsync();
 
-            if (affectedRows > 0)
-                return true;
-            else
-                return false;
-            
-
+            return affectedRows > 0;
         }
     }
 }

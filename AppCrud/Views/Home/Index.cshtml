@@ -2,7 +2,73 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+<div class="row justify-content-center">
+    <div class="col-10">
+        <div class="alert alert-info" role="alert">
+            Crud Empleados
+        </div>
+        <button type="button" class="btn btn-success btn-sm boton-nuevo-empleado"> Nuevo Empleado </button>
+
+        <table class="table table-striped" id="tablaEmpleados">
+            <thead>
+            <tr>
+                <th>Nombre Completo</th>
+                <th>Departamento</th>
+                <th>Sueldo</th>
+                <th>Fecha Contrato</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalEmpleado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal Empleado</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                
+                <div class="mb-3">
+                    <label class="form-label">Nombre Completo</label>
+                    <input type="text" class="form-control" id="txtNombreCompleto" autocomplete="off">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Departamento</label>
+                    <select class="form-select" id="cboDepartamento"></select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Sueldo </label>
+                    <input type="number" class="form-control" id="txtSueldo">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Fecha Contrato</label>
+                    <input type="text" class="form-control" id="txtFechaContrato" autocomplete="off">
+                </div>
+
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary boton-guardar-cambios-empleado">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts
+{
+    <script src="~/js/Index.js"></script>
+}
